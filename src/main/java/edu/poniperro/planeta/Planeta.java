@@ -17,7 +17,7 @@ public enum Planeta {
     private double masa = 0f;
     private double radio = 0f;
 
-    private Planeta(double masa, double radio) {
+    Planeta(double masa, double radio) {
         this.masa = masa;
         this.radio = radio;
     }
@@ -30,16 +30,16 @@ public enum Planeta {
         return radio;
     }
 
-    public double gravedadPlaneta() {
-        return (G * getMasa()) / getRadio();
-    }
-
     public double pesoSuperficie(double peso) {
         return masaHumano(peso) * gravedadPlaneta();
     }
 
+    public double gravedadPlaneta() {
+        return (G * getMasa()) / Math.pow(getRadio(), 2);
+    }
+
     private double masaHumano(double peso) {
-        return peso;
+        return peso / gravedadPlaneta();
     }
 
     public static EnumSet<Planeta> getPlanetasTerrestres() {
